@@ -4,4 +4,4 @@ The Student Success and Dropout dataset is from the UCI Machine Learning Reposit
 
 The dataset consists of 4,421 rows of student data and 37 columns. It includes information about demographics (e.g., marital status, nationality, parental education, and occupation), academic performance (e.g., admission grades, first and second-semester grades, curricular unit evaluations and approvals), and socioeconomic indicators (e.g., unemployment rate, inflation rate, GDP). The target variable, "Target", indicates whether a student graduated, dropped out, or is still enrolled.
 
-Implementation of hypothesis testing, data visualizations, Random Forest Classification, and Naive Bayes Classification
+Implementation of Data Visualizations, Hypothesis Testing, Random Forest Classification, and Naive Bayes Classification
