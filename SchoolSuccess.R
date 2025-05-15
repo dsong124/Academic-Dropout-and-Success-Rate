@@ -99,7 +99,6 @@ cor_matrix1 <- cor(important_vars, use = "complete.obs")
 
 heatmap_data2 <- as.data.frame(as.table(cor_matrix1))
 
-# Plot heatmap
 ggplot(heatmap_data2, aes(Var1, Var2, fill = Freq)) +
   geom_tile(color = "white") +
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
@@ -114,7 +113,7 @@ ggplot(heatmap_data2, aes(Var1, Var2, fill = Freq)) +
 
 # <--------------------------------------------------------------------->
 # Socio-economic Factors
-# important variables based on context (grades, target var, others?)
+#important variables based on context (grades, target var, others?)
 important_vars1 <- clean_data %>%
   select(Mother.s.qualification, Mother.s.occupation, Father.s.qualification, 
          Father.s.occupation, Unemployment.rate, Inflation.rate, GDP,
@@ -143,19 +142,16 @@ ggplot(heatmap_data3, aes(Var1, Var2, fill = Freq)) +
 # <--------------------------------------------------------------------->
 # Demographic Factors
 
-# important variables based on context (grades, target var, others?)
+#important variables based on context (grades, target var, others?)
 important_vars2 <- clean_data %>%
   select(Gender, International, Displaced, Nacionality, Age.at.enrollment , 
          Marital.status, Target) %>%
   select(where(is.numeric))
 
-# correlation matrix for the selected variables
 cor_matrix2 <- cor(important_vars2, use = "complete.obs")
 
-# convert to better suit ggplot
 heatmap_data3 <- as.data.frame(as.table(cor_matrix2))
 
-# Plot heatmap
 ggplot(heatmap_data3, aes(Var1, Var2, fill = Freq)) +
   geom_tile(color = "white") +
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1)) +
@@ -169,13 +165,12 @@ ggplot(heatmap_data3, aes(Var1, Var2, fill = Freq)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # <--------------------------------------------------------------------->
-# Summarize the counts and calculate percentages
+# summary of the counts and calculated percentages
 data_summary <- clean_data %>%
   group_by(Target) %>%
   summarise(count = n()) %>%
   mutate(percentage = round(count / sum(count) * 100, 1))
 
-# Create the pie chart with percentages
 ggplot(data_summary, aes(x = "", y = count, fill = Target)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar(theta = "y") +
@@ -188,13 +183,11 @@ ggplot(data_summary, aes(x = "", y = count, fill = Target)) +
 
 # Plots focused on Dropout rates
 
-# Group the data by Tuition.fees.up.to.date and Target
 tuition_vs_dropout <- data %>%
   group_by(Tuition.fees.up.to.date, Target) %>%
   summarise(count = n()) %>%
   mutate(percentage = round(count / sum(count) * 100, 1))
 
-# Create the bar plot
 ggplot(tuition_vs_dropout, aes(x = Target, y = percentage, fill = factor(Tuition.fees.up.to.date))) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_text(
@@ -221,14 +214,13 @@ ggplot(clean_data, aes(x = Age.at.enrollment)) +
 #---------------------
 
 
-# Sample data
+#Sample data
 set.seed(123)
 data <- data.frame(
   Age = c(rnorm(500, mean = 20, sd = 1.5), rnorm(200, mean = 25, sd = 5)),
   Dropout = factor(c(rep(0, 500), rep(1, 200)))
 )
 
-# Plot using ggplot2
 ggplot(data, aes(x = Age, fill = Dropout)) +
   geom_density(alpha = 0.5) +
   labs(
@@ -258,8 +250,8 @@ pie(marital_pie_data$n,
 #<---------------------------------------------------------------------->
 
 #academic_variables <- "Admission.grade", 
-                        "Curricular.units.1st.sem..grade."
-                        "Curricular.units.2nd.sem..grade."
+                    #    "Curricular.units.1st.sem..grade."
+                    #    "Curricular.units.2nd.sem..grade."
 
 grouped_data <- clean_data %>%
   filter(Target %in% c("Enrolled", "Dropout"))
@@ -319,7 +311,7 @@ print(foccup)
 
 #<--------------------------------------------------------------------->
 #demographic_variables <- "Age.at.enrollment"
-                           "Marital.status"
+                         #  "Marital.status"
                            
 age <- t.test(
   Age.at.enrollment ~ Target, 
@@ -336,4 +328,11 @@ marital_status <- t.test(
 )
 
 print(marital_status)
+
+#<--------------------------------------------------------------------->
+
+
+
+
+
 
